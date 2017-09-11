@@ -28,6 +28,8 @@ WJoy will now automatically calibrate the Wii U Pro Controller analog sticks on 
 
 Thanks to [Kametrixom](https://github.com/Kametrixom) for this fix.
 
+The analog sticks were underreporting diagonals in Steam titles (and perhaps elsewhere), so I've [amplified both axes by 1.5](https://github.com/tapesonthefloor/wjoy-foohid/commit/12c38885c41ae601b85115fce94130e6afeebb9c) as a reasonable workaround for now. A bit of precision is lost, but it's vastly preferable to slow diagonals.  
+
 ## Why foohid?
 
 In OS X El Capitan (version 10.11), Apple added [System Integrity Protection (AKA "rootless" mode)](http://apple.stackexchange.com/questions/193368/) as a security feature. Among other things, this feature prevents the operating system from running unsigned kernel extensions (kexts). The original WJoy project included an unsigned kext to provide a virtual HID for each connected wiimote and thus the original project no longer works on modern versions of OS X.
