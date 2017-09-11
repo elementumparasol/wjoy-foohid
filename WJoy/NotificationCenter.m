@@ -101,7 +101,7 @@
     [UserNotificationCenter
         deliver:[UserNotification
                     userNotificationWithTitle:@"WJoy started"
-                                         text:@"We started :)"]];
+                                         text:@"Hi <3"]];
 
     return self;
 }

@@ -153,6 +153,9 @@ static NSUInteger maxConnectedDevices = 0;
 {
 	// Calibrate the analog sticks on the fly
 	// Thanks to Kametrixom for the fix ( https://github.com/Kametrixom/wjoy-1/commit/686c49a5de411ba77f459ba1325b17ba1b44c343 )
+    
+    // All final positions amplified by 1.5 to provide "full chord" diagonals in Steam
+    
 	switch (stick) {
 		case WiimoteUProControllerStickTypeLeft:
 			minL.x = MIN(minL.x, position.x);
@@ -161,8 +164,8 @@ static NSUInteger maxConnectedDevices = 0;
 			maxL.x = MAX(maxL.x, position.x);
 			maxL.y = MAX(maxL.y, position.y);
 			
-			position.x = (position.x - minL.x) / (maxL.x - minL.x) * 2 - 1;
-			position.y = (position.y - minL.y) / (maxL.y - minL.y) * 2 - 1;
+			position.x = ((position.x - minL.x) / (maxL.x - minL.x) * 2 - 1 ) * 1.5;
+			position.y = ((position.y - minL.y) / (maxL.y - minL.y) * 2 - 1 ) * 1.5;
 			break;
 		case WiimoteUProControllerStickTypeRight:
 			minR.x = MIN(minR.x, position.x);
@@ -171,13 +174,14 @@ static NSUInteger maxConnectedDevices = 0;
 			maxR.x = MAX(maxR.x, position.x);
 			maxR.y = MAX(maxR.y, position.y);
 			
-			position.x = (position.x - minR.x) / (maxR.x - minR.x) * 2 - 1;
-			position.y = (position.y - minR.y) / (maxR.y - minR.y) * 2 - 1;
+			position.x = ((position.x - minR.x) / (maxR.x - minR.x) * 2 - 1 ) * 1.5;
+			position.y = ((position.y - minR.y) / (maxR.y - minR.y) * 2 - 1 ) * 1.5;
 			break;
 	}
 	
 	NSLog(@"\nMinLx: %f\tMinLy: %f\tMaxLx: %f\tMaxLy: %f", minL.x, minL.y, maxL.x, maxL.y);
 	NSLog(@"\nMinRx: %f\tMinRy: %f\tMaxRx: %f\tMaxRy: %f", minR.x, minR.y, maxR.x, maxR.y);
+    NSLog(@"\npositionx: %f\tpositiony: %f", position.x, position.y );
 	
 	[m_HIDState setPointer:stick position:position];
 }
